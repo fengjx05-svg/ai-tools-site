@@ -1,0 +1,67 @@
+---
+title: "Codex CLI 从零到上手：AI 初学者指南"
+slug: "codex-from-zero"
+category: "codex"
+description: "从安装 OpenAI Codex CLI 到完成第一个项目，完整的 AI 编程入门教程。零基础也能跟着做。"
+difficulty: "beginner"
+tags: ["Codex", "OpenAI", "入门"]
+updated: "2026-05-11"
+related_tools: ["codex"]
+---
+
+## 这篇文章适合谁？
+
+- 听说过 AI 编程但不知道从哪开始
+- 想用 Codex CLI 但不知道怎么装
+- 装了之后不知道怎么高效使用
+
+## 第一步：安装 Codex CLI
+
+```bash
+npm install -g @openai/codex
+```
+
+安装完成后验证：
+
+```bash
+codex --version
+```
+
+## 第二步：配置 API Key
+
+你需要一个 OpenAI API Key：
+
+1. 打开 platform.openai.com
+2. 登录后点右上角头像 → API Keys
+3. 创建一个新的 API Key
+4. 在终端配置：`export OPENAI_API_KEY="sk-你的key"`
+
+## 第三步：第一个 AI 编程任务
+
+进入你的项目目录，让 Codex 帮你写代码。Codex 会分析你的项目，然后写出代码。
+
+## 第四步：让 Codex 调试
+
+如果你的代码有 bug，直接告诉 Codex 错误信息，它会读取相关代码给出修复方案。
+
+## 第五步：完成一个小项目
+
+让 Codex 帮你完成一个完整任务，比如创建一个 Flask API 端点。
+
+## 常见错误
+
+1. **API Key 没配置好** — 检查环境变量是否设置
+2. **权限不足** — 确保 API Key 有使用权限
+3. **任务描述太模糊** — 说得越具体，效果越好
+
+## 下一步
+
+完成这个入门后，推荐看看 Claude Code 教程，对比一下两个工具，选一个最适合你的。
+
+## FAQ
+
+### Codex 和 ChatGPT 有什么区别？
+Codex 是专门为编程设计的终端工具，可以直接操作文件。ChatGPT 是通用的网页对话工具，不能直接操作你的项目代码。
+
+### 我需要会 Python 才能用 Codex 吗？
+不需要。Codex 支持多种语言，你也可以用中文描述需求。但基础编程知识能帮你更好地判断 AI 生成的代码质量。

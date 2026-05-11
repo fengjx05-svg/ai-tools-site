@@ -1,0 +1,74 @@
+---
+title: "Claude Code 10 个实用技巧（2026 版）"
+slug: "claude-code-tips"
+category: "claude-code"
+description: "从安装到高效使用，10 个 Claude Code 实用技巧帮你快速上手 AI 编程。适合 AI 初学者和想提升效率的开发者。"
+difficulty: "beginner"
+tags: ["Claude Code", "技巧", "效率"]
+updated: "2026-05-11"
+related_tools: ["claude-code"]
+---
+
+## 为什么学 Claude Code？
+
+Claude Code 是目前最强的终端 AI 编程工具。但很多人装了之后只知道 `claude "帮我写个函数"`，远没有发挥出它的真正威力。这 10 个技巧帮你从入门到高效。
+
+## 技巧 1：用 /init 让 Claude 理解项目
+
+```bash
+claude /init
+```
+
+这个命令让 Claude Code 索引你的项目结构。它会记住每个文件在哪、代码之间什么关系。之后的对话中，你不用解释项目架构，Claude 自己知道。
+
+## 技巧 2：@ 引用文件
+
+用 `@` 直接引用文件，Claude 会精确读取这个文件的内容。比手动复制粘贴快 10 倍。
+
+## 技巧 3：描述目标，不要描述步骤
+
+❌ 差的提问：`帮我在 line 42 后面加一个 if 判断，然后在 line 68 改一下变量名...`
+
+✅ 好的提问：`用户登录失败时应该显示具体的错误信息，而不是通用的"登录失败"`
+
+Claude 比你更懂怎么写代码。告诉它你要什么结果，让它决定怎么实现。
+
+## 技巧 4：让 Claude 自己测试
+
+让 Claude Code 写完代码后自己跑测试、自己修 bug。
+
+## 技巧 5：用 /compact 管理上下文
+
+对话时间长了之后，用 `/compact` 压缩上下文。Claude 会保留关键信息，保持对话质量。
+
+## 技巧 6：分任务，不要一次给太多
+
+小任务成功率更高，出问题也容易回滚。
+
+## 技巧 7：善用 .claude/CLAUDE.md
+
+在项目根目录创建 `.claude/CLAUDE.md`，写入项目说明、代码规范、常用命令。Claude Code 每次启动都会读取这个文件。
+
+## 技巧 8：对于复杂任务，用 /plan 模式
+
+让 Claude 先出方案，你审核后再执行。避免 AI 盲目改动重要代码。
+
+## 技巧 9：用 Claude 写 commit message
+
+Claude 总结改动比你自己写更全面。
+
+## 技巧 10：定期更新
+
+Claude Code 更新很快。用 `claude --version` 检查版本。
+
+## 总结
+
+这 10 个技巧的核心思路是：**把 Claude 当成一个聪明的同事，而不是一个代码生成器**。给它上下文、明确目标、小步迭代，效果最好。
+
+## FAQ
+
+### Claude Code 需要编程基础吗？
+需要基本的命令行操作能力（cd、ls、git 等）。如果完全没接触过命令行，建议先从 Cursor 这类 IDE 工具上手。
+
+### 这些技巧也适用于 Codex 吗？
+大部分通用的 AI 协作技巧（描述目标、分任务、用项目文件）适用于所有 AI 编程工具。具体的命令和语法需要看各自文档。

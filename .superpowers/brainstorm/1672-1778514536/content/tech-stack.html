@@ -1,0 +1,79 @@
+<h2>技术栈 & 项目结构</h2>
+<p class="subtitle">符合你的要求：Next.js + TypeScript + Tailwind + MDX + Vercel</p>
+
+<div class="split">
+  <div class="mockup" style="flex: 1;">
+    <div class="mockup-header">技术选型</div>
+    <div class="mockup-body" style="font-size: 14px; line-height: 1.8;">
+      <p><strong>框架：</strong>Next.js 15 (App Router)</p>
+      <p><strong>语言：</strong>TypeScript</p>
+      <p><strong>样式：</strong>Tailwind CSS</p>
+      <p><strong>内容：</strong>MDX 文件（本地 markdown）</p>
+      <p><strong>渲染：</strong>SSG (静态生成) + ISR (增量更新)</p>
+      <p><strong>部署：</strong>GitHub → Vercel（免费）</p>
+      <p><strong>分析：</strong>Vercel Analytics + Google Search Console</p>
+      <p><strong>广告：</strong>Google AdSense</p>
+      <hr style="margin: 12px 0;">
+      <p style="font-size: 13px; color: var(--text-secondary);">
+        <strong>为什么不用 CMS？</strong><br>
+        新手站点内容量还不大，MDX 文件写完即部署，免数据库、免后端、加载快、Google 友好。以后量大再迁到 Headless CMS。
+      </p>
+    </div>
+  </div>
+
+  <div class="mockup" style="flex: 1.2;">
+    <div class="mockup-header">目录结构</div>
+    <div class="mockup-body">
+      <pre style="font-size: 12px; line-height: 1.6; background: none; padding: 0; margin: 0;">
+src/
+├── app/
+│   ├── page.tsx                  ← 首页
+│   ├── layout.tsx                ← 全局布局
+│   ├── tools/                    ← 工具路由
+│   │   ├── page.tsx              ← 工具分类页
+│   │   └── [slug]/
+│   │       └── page.tsx          ← 单工具评测页
+│   ├── tutorials/                ← 教程路由
+│   │   ├── page.tsx              ← 教程列表页
+│   │   └── [slug]/
+│   │       └── page.tsx          ← 单篇教程页
+│   ├── compare/                  ← 对比页路由
+│   │   └── [slug]/
+│   │       └── page.tsx
+│   ├── about/page.tsx
+│   ├── contact/page.tsx
+│   ├── sitemap.ts               ← 自动生成 sitemap
+│   └── robots.ts                ← robots.txt
+├── content/
+│   ├── tools/                    ← MDX 工具数据
+│   ├── tutorials/                ← MDX 教程文章
+│   └── compare/                  ← MDX 对比页
+├── components/                   ← 复用组件
+└── lib/                          ← 工具函数 & SEO helpers
+      </pre>
+    </div>
+  </div>
+</div>
+
+<div class="section" style="margin-top: 24px;">
+  <h3>为什么选这个方案</h3>
+  <div class="pros-cons">
+    <div class="pros">
+      <h4>优势</h4>
+      <ul>
+        <li>MDX 直接写内容，本地编辑 → Git push → 自动部署</li>
+        <li>静态页面加载快，Google Lighthouse 高分</li>
+        <li>零服务器成本，Vercel 免费额度够用</li>
+        <li>TypeScript 保证代码质量</li>
+      </ul>
+    </div>
+    <div class="cons">
+      <h4>注意</h4>
+      <ul>
+        <li>内容多了以后 MDX 管理不如 CMS 方便</li>
+        <li>没有后台管理界面，编辑靠代码编辑器</li>
+        <li>后期内容量大可迁移到 Contentlayer 或 CMS</li>
+      </ul>
+    </div>
+  </div>
+</div>

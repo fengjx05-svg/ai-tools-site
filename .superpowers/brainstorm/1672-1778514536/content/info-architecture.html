@@ -1,0 +1,55 @@
+<h2>网站信息架构 — «AI工具导航 + 教程博客»</h2>
+<p class="subtitle">页面类型 × 层级关系 × SEO 角色</p>
+
+<div class="section">
+  <h3>核心页面树</h3>
+  <div style="font-family: monospace; background: var(--bg-secondary); padding: 24px; border-radius: 8px; line-height: 2;">
+    <strong>🏠 首页</strong> — 热门工具排行 + 最新教程 + 分类入口<br>
+    <span style="margin-left: 20px;">├── <strong>📁 工具分类页</strong> — "AI编程工具" / "AI写作工具" / "AI图像工具"...</span><br>
+    <span style="margin-left: 40px;">├── <strong>📄 单工具评测页</strong> — Claude Code 深度评测</span><br>
+    <span style="margin-left: 40px;">├── <strong>📄 单工具评测页</strong> — Codex / Cursor / Windsurf...</span><br>
+    <span style="margin-left: 40px;">└── <strong>📄 对比页</strong> — "Claude Code vs Codex 哪个适合新手"</span><br>
+    <span style="margin-left: 20px;">├── <strong>📁 教程分类页</strong> — "Claude Code教程" / "Agent入门" / "AI编程基础"</span><br>
+    <span style="margin-left: 40px;">├── <strong>📄 教程文章</strong> — "Claude Code 10个实用技巧"</span><br>
+    <span style="margin-left: 40px;">├── <strong>📄 教程文章</strong> — "Codex 从零到上手"</span><br>
+    <span style="margin-left: 40px;">└── <strong>📄 系列教程</strong> — "Agent 入门 7 天指南"（多篇连载）</span><br>
+    <span style="margin-left: 20px;">├── 📄 关于页</span><br>
+    <span style="margin-left: 20px;">├── 📄 联系页</span><br>
+    <span style="margin-left: 20px;">├── 📄 sitemap.xml</span><br>
+    <span style="margin-left: 20px;">└── 📄 robots.txt</span>
+  </div>
+</div>
+
+<div class="section">
+  <h3>三种核心页面类型的 SEO 角色</h3>
+  <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px;">
+    <div style="background: var(--bg-secondary); padding: 16px; border-radius: 8px; border-left: 3px solid #3b82f6;">
+      <h4 style="margin-top: 0;">🔗 工具页</h4>
+      <p style="font-size: 14px;"><strong>抢高搜索量词</strong></p>
+      <p style="font-size: 13px;">标题含"2026"、"最好用"、"推荐"、"对比"</p>
+      <p style="font-size: 13px;">结构化数据：评分、价格、功能对比表</p>
+      <p style="font-size: 13px;">CTAs：跳转官网 / 教程推荐</p>
+    </div>
+    <div style="background: var(--bg-secondary); padding: 16px; border-radius: 8px; border-left: 3px solid #10b981;">
+      <h4 style="margin-top: 0;">📝 教程页</h4>
+      <p style="font-size: 14px;"><strong>抢长尾教程词</strong></p>
+      <p style="font-size: 13px;">标题含"教程"、"技巧"、"指南"、"怎么用"</p>
+      <p style="font-size: 13px;">结构化数据：HowTo / Article schema</p>
+      <p style="font-size: 13px;">CTAs：相关工具 / 下一篇教程</p>
+    </div>
+    <div style="background: var(--bg-secondary); padding: 16px; border-radius: 8px; border-left: 3px solid #f59e0b;">
+      <h4 style="margin-top: 0;">📊 对比页</h4>
+      <p style="font-size: 14px;"><strong>抢对比决策词</strong></p>
+      <p style="font-size: 13px;">标题含"vs"、"对比"、"哪个好"、"怎么选"</p>
+      <p style="font-size: 13px;">结构化数据：Comparison / Table schema</p>
+      <p style="font-size: 13px;">CTAs：单工具评测页 / 购买链接</p>
+    </div>
+  </div>
+</div>
+
+<div class="section" style="margin-top: 24px;">
+  <h3>内链策略</h3>
+  <p style="font-size: 14px; color: var(--text-secondary);">
+    工具页 → 推荐相关教程 | 教程页 → 提及的工具评测页 | 对比页 → 单工具页 | 首页 → 最新内容
+  </p>
+</div>
