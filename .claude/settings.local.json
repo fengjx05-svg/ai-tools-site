@@ -36,7 +36,8 @@
       "Bash(curl *)",
       "Bash(python3 -c \"import sys; html = sys.stdin.read\\(\\); print\\('overflow' in html, 'table' in html, 'border-gray-200' in html, 'bg-gray-800' in html, 'rounded-xl' in html\\)\")",
       "Bash(taskkill //F //IM node.exe)",
-      "WebSearch"
+      "WebSearch",
+      "Bash(grep -oP '.{0,200}\\(adsbygoogle|ad-client|ad-slot|Advertisement|8306337799\\).{0,200}')"
     ]
   }
 }

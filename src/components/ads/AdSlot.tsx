@@ -13,6 +13,15 @@ const placeholderHeight: Record<AdFormat, number> = {
   auto: 280,
 };
 
+function log(slot: string, msg: string, data?: unknown) {
+  console.log(
+    `%c[AdSense:${slot}]%c ${msg}`,
+    "color:#2563eb;font-weight:600",
+    "color:inherit",
+    data ?? ""
+  );
+}
+
 export default function AdSlot({
   slot,
   format = "auto",
@@ -24,6 +33,7 @@ export default function AdSlot({
 }) {
   const containerRef = useRef<HTMLDivElement>(null);
   const pushedRef = useRef(false);
+  const insRef = useRef<HTMLElement | null>(null);
   const [unfilled, setUnfilled] = useState(false);
 
   useEffect(() => {
@@ -32,9 +42,11 @@ export default function AdSlot({
 
     const container = containerRef.current;
 
-    // Programmatic <ins> creation avoids React hydration conflicts:
-    // adsbygoogle.js injects <iframe> into <ins> — if React SSR owns the
-    // <ins> node, hydration may nuke the injected content on mismatch.
+    // ── Diagnostic 1: is adsbygoogle.js loaded? ──
+    const adsbygoogleLoaded = typeof window.adsbygoogle !== "undefined";
+    log(slot, `adsbygoogle.js loaded: ${adsbygoogleLoaded}`);
+
+    // ── Create ins element programmatically ──
     const ins = document.createElement("ins");
     ins.className = "adsbygoogle";
     ins.style.display = "block";
@@ -44,23 +56,55 @@ export default function AdSlot({
     ins.setAttribute("data-ad-format", format);
     ins.setAttribute("data-full-width-responsive", "true");
     container.appendChild(ins);
+    insRef.current = ins;
+    log(slot, `<ins> created and appended to DOM`, {
+      client: AD_CLIENT,
+      slot,
+      format,
+      parentWidth: container.offsetWidth,
+    });
 
+    // ── Diagnostic 2: push to adsbygoogle ──
     try {
       (window.adsbygoogle = window.adsbygoogle || []).push({});
-    } catch {
+      log(slot, "adsbygoogle.push({}) called successfully");
+    } catch (err) {
+      log(slot, "ERROR: adsbygoogle.push({}) threw — likely adblocker", err);
       setUnfilled(true);
       return;
     }
 
-    // After 3s, check if ad filled. If not, collapse whitespace.
-    const timer = setTimeout(() => {
+    // ── Diagnostic 3: monitor what AdSense does ──
+    const checkStatus = (stage: string) => {
       const status = ins.getAttribute("data-ad-status");
-      if (status === "unfilled" || !ins.firstChild) {
+      const hasChild = !!ins.firstChild;
+      const childTag = hasChild ? ins.firstChild?.nodeName : "none";
+      const inlineHeight = ins.style.height;
+      const inlineWidth = ins.style.width;
+      log(slot, `[${stage}] status=${status || "unset"} firstChild=${childTag} height=${inlineHeight} width=${inlineWidth}`);
+      return { status, hasChild };
+    };
+
+    // Check after 1.5s
+    const t1 = setTimeout(() => checkStatus("1.5s"), 1500);
+    // Check after 4s, collapse if still unfilled
+    const t2 = setTimeout(() => {
+      const { status, hasChild } = checkStatus("4s");
+      if (status === "unfilled" || !hasChild) {
+        log(slot, "→ collapsing — no ad filled");
+        setUnfilled(true);
+      } else if (status === "filled" || hasChild) {
+        log(slot, "→ ad appears filled, keeping visible");
+      } else {
+        log(slot, `→ unknown state, status="${status}", hasChild=${hasChild}`);
         setUnfilled(true);
       }
-    }, 3000);
+    }, 4000);
 
-    return () => clearTimeout(timer);
+    return () => {
+      clearTimeout(t1);
+      clearTimeout(t2);
+    };
   }, [slot, format]);
 
   return (
