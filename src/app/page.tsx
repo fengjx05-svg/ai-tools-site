@@ -37,7 +37,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      <AdSlot slot="home-top" format="horizontal" />
+      <AdSlot slot="8306337799" format="horizontal" />
 
       {/* Tools */}
       <section className="py-10">
@@ -90,7 +90,7 @@ export default function HomePage() {
         </Link>
       </section>
 
-      <AdSlot slot="home-bottom" format="horizontal" />
+      <AdSlot slot="8306337799" format="horizontal" />
     </Container>
   );
 }

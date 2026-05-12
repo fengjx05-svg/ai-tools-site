@@ -98,11 +98,11 @@ export default async function TutorialPage({ params }: Props) {
             ))}
           </div>
 
-          <AdSlot slot="content-top" />
+          <AdSlot slot="8306337799" />
 
           <MDXContent source={tutorial.content} />
 
-          <AdSlot slot="content-bottom" />
+          <AdSlot slot="8306337799" />
 
           <RelatedLinks
             title="相关教程"

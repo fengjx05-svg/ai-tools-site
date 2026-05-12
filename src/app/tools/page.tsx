@@ -34,13 +34,13 @@ export default function ToolsPage() {
           <p className="text-slate-500 mb-10">
             精选推荐，持续更新。帮你找到最适合的 AI 编程助手。
           </p>
-          <AdSlot slot="top-banner" format="horizontal" />
+          <AdSlot slot="8306337799" format="horizontal" />
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {tools.map(({ frontmatter }) => (
               <ToolCard key={frontmatter.slug} tool={frontmatter} />
             ))}
           </div>
-          <AdSlot slot="bottom-banner" format="horizontal" />
+          <AdSlot slot="8306337799" format="horizontal" />
         </div>
       </Container>
     </>
