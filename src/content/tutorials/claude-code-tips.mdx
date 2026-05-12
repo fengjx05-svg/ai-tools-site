@@ -2,73 +2,261 @@
 title: "Claude Code 10 个实用技巧（2026 版）"
 slug: "claude-code-tips"
 category: "claude-code"
-description: "从安装到高效使用，10 个 Claude Code 实用技巧帮你快速上手 AI 编程。适合 AI 初学者和想提升效率的开发者。"
+description: "从安装到高效使用，10 个 Claude Code 实用技巧帮你快速上手 AI 编程。包含代码示例、实战场景和避坑指南，适合 AI 初学者和想提升效率的开发者。"
 difficulty: "beginner"
-tags: ["Claude Code", "技巧", "效率"]
-updated: "2026-05-11"
+tags: ["Claude Code", "技巧", "效率", "命令行"]
+updated: "2026-05-12"
 related_tools: ["claude-code"]
+related_tutorials: ["agent-intro-guide"]
 ---
 
-## 为什么学 Claude Code？
+## 阅读前
 
-Claude Code 是目前最强的终端 AI 编程工具。但很多人装了之后只知道 `claude "帮我写个函数"`，远没有发挥出它的真正威力。这 10 个技巧帮你从入门到高效。
+这篇文章适合：
+- 刚装好 Claude Code，想知道怎么用得更好的人
+- 用了几天但感觉效率一般的人
+- 想从"能用"进阶到"高效"的 AI 编程初学者
 
-## 技巧 1：用 /init 让 Claude 理解项目
+每个技巧都附带具体命令和真实场景，你可以边看边试。
+
+## 技巧 1：用 `/init` 让 Claude 理解项目
 
 ```bash
 claude /init
 ```
 
-这个命令让 Claude Code 索引你的项目结构。它会记住每个文件在哪、代码之间什么关系。之后的对话中，你不用解释项目架构，Claude 自己知道。
+这是大多数人跳过的第一步，也是最关键的一步。
 
-## 技巧 2：@ 引用文件
+`/init` 让 Claude Code 扫描你的项目目录，生成项目索引。之后 Claude 就知道：
+- 你的项目有哪些文件和目录
+- 文件之间怎么引用
+- package.json 里有哪些依赖
+- 项目的整体架构
 
-用 `@` 直接引用文件，Claude 会精确读取这个文件的内容。比手动复制粘贴快 10 倍。
+**真实场景：** 假设你新接手一个 React + Next.js 项目，里面有 50+ 个文件。不跑 `/init` 的话，每次提问都要手动 `@` 引用各个文件。跑完 `/init`，你可以直接说："帮我在用户登录流程里加上邮箱验证"，Claude 自己知道去 `auth.ts`、`login/page.tsx`、`middleware.ts` 里找相关代码。
+
+**最佳实践：**
+- 首次进项目就跑一次
+- 装了新的重要依赖后重新跑
+- 项目结构大改后重新跑
+
+## 技巧 2：`@` 引用文件，精确操作
+
+```
+claude "@src/utils/format.ts 这个文件的日期处理有什么问题？"
+claude "@src/app/api/auth/route.ts 帮我加上 JWT 验证"
+claude "@src/components/Header.tsx 无障碍访问有什么可以改进的？"
+```
+
+`@` 是精确制导导弹，不用它等于让 AI 盲猜。可以一次引用多个文件：
+
+```
+claude "@src/types.ts @src/api/client.ts 这俩类型定义不一致，帮我统一"
+```
+
+**对比：**
+
+| 不用 @ | 用 @ |
+|--------|------|
+| "帮我看看登录功能" | "@src/app/auth 登录流程有什么安全问题" |
+| Claude 可能会看错文件或猜内容 | Claude 精确读取指定文件 |
+| 结果可能需要反复修正 | 一次性准确率高很多 |
 
 ## 技巧 3：描述目标，不要描述步骤
 
-❌ 差的提问：`帮我在 line 42 后面加一个 if 判断，然后在 line 68 改一下变量名...`
+这是 AI 编程和其他自动化工具最大的区别。
 
-✅ 好的提问：`用户登录失败时应该显示具体的错误信息，而不是通用的"登录失败"`
+❌ **差的提问（微管理）：**
+```
+帮我在 user.service.ts 第 42 行后面加一个 if 判断，
+判断 email 是否为空，如果为空返回错误。
+然后在 controller 里 catch 这个错误，
+返回 400 状态码。
+```
 
-Claude 比你更懂怎么写代码。告诉它你要什么结果，让它决定怎么实现。
+✅ **好的提问（描述目标）：**
+```
+用户注册时如果邮箱为空，应该返回 400 错误和具体的错误信息，
+而不是 500 泛泛的"服务器错误"。帮我实现。
+```
+
+**为什么？** Claude 比你更懂怎么写代码。它知道最佳实践、边界情况、类型安全。你限制它每一步怎么做，反而限制了它的能力。告诉它你要什么**结果**，让它决定怎么实现。
+
+**另一个例子：**
+
+❌ `帮我把这个 for 循环改成 map`
+✅ `这个函数可以写得更函数式一点吗`
+（Claude 可能会用 map、filter、reduce 组合优化，而不只是机械替换）
 
 ## 技巧 4：让 Claude 自己测试
 
-让 Claude Code 写完代码后自己跑测试、自己修 bug。
+```bash
+claude "实现用户注册的邮箱验证功能，然后自己写测试并运行，确保通过"
+```
 
-## 技巧 5：用 /compact 管理上下文
+Claude Code 可以执行 shell 命令。这意味着它不只是写代码——它可以：
+1. 写实现代码
+2. 写测试代码  
+3. 运行 `npm test`
+4. 如果测试失败，自己看报错
+5. 修 bug
+6. 再跑测试
+7. 直到通过
 
-对话时间长了之后，用 `/compact` 压缩上下文。Claude 会保留关键信息，保持对话质量。
+**真实场景：** 一次提需求、一次验收，中间 AI 自己迭代。你省下了"看报错 → 复制报错 → 让 AI 改 → 再跑"的循环时间。
 
-## 技巧 6：分任务，不要一次给太多
+**注意：** 验证结果一定要自己再过一遍。AI 的逻辑审查不能替代人工代码审查。
 
-小任务成功率更高，出问题也容易回滚。
+## 技巧 5：用 `/compact` 管理上下文
 
-## 技巧 7：善用 .claude/CLAUDE.md
+对话长了之后，Claude 的上下文窗口会被历史消息占满。这时候用：
 
-在项目根目录创建 `.claude/CLAUDE.md`，写入项目说明、代码规范、常用命令。Claude Code 每次启动都会读取这个文件。
+```bash
+claude /compact
+```
 
-## 技巧 8：对于复杂任务，用 /plan 模式
+Claude 会把历史对话压缩成摘要，释放空间给后续对话。不会丢失关键信息，但如果是非常细节的对话，压缩后可能丢失一些细微上下文。
 
-让 Claude 先出方案，你审核后再执行。避免 AI 盲目改动重要代码。
+**什么时候用：**
+- 对话超过 30-50 轮
+- 感觉 Claude 开始"忘了"之前聊过的内容
+- 要开始一个新的话题方向
+- 输出质量开始下降
 
-## 技巧 9：用 Claude 写 commit message
+## 技巧 6：分任务，小步快跑
 
-Claude 总结改动比你自己写更全面。
+❌ **一次给太多：**
+```
+帮我把整个项目从 JavaScript 迁移到 TypeScript，
+所有文件都加类型，改完后重构目录结构。
+```
 
-## 技巧 10：定期更新
+✅ **分步来：**
+```
+任务 1：先把 src/utils/ 下的 3 个文件改成 TypeScript
+任务 2：改完之后告诉我，再改 src/components/
+任务 3：最后改 src/pages/
+```
 
-Claude Code 更新很快。用 `claude --version` 检查版本。
+**为什么分任务好？**
+- 每步成功率高，出问题容易定位和回滚
+- 你可以逐步审查，及时纠偏
+- Claude 的上下文不会丢失（小任务完成快）
+- 你更有掌控感
+
+## 技巧 7：善用 `CLAUDE.md` 做项目宪法
+
+在项目根目录创建 `.claude/CLAUDE.md`：
+
+```markdown
+# 项目说明
+这是一个面向 C 端的电商项目，Next.js + TypeScript。
+
+# 代码规范
+- 所有 API 返回统一用 { code, data, message } 格式
+- 组件用 named export，不用 default export
+- 文件命名用 kebab-case
+- 提交信息用 Conventional Commits
+
+# 常用命令
+- 开发: npm run dev
+- 测试: npm test
+- 类型检查: npm run typecheck
+```
+
+Claude Code 每次启动都自动读取这个文件。相当于给 AI 一份"新人入职手册"。
+
+**能放什么：**
+- 项目背景和业务说明
+- 代码风格规范
+- 技术栈和常用命令
+- 团队约定的注意事项
+
+有了这个文件，你不用每次对话都重复"我们项目用 xxx 规范"。
+
+## 技巧 8：复杂任务先用 `/plan`
+
+```bash
+claude /plan "我要把用户权限系统从简单的 admin/user 改成 RBAC，需要支持角色、权限、资源三个维度"
+```
+
+Claude 会先分析需求，给出实现方案：
+- 数据库要加哪些表
+- 哪些文件要改
+- 改动的先后顺序
+- 潜在风险
+
+你审核方案没问题了，再让它执行。**想清楚再动手，比改到一半发现方向错了强。**
+
+## 技巧 9：用 Claude 生成提交信息
+
+```bash
+claude "生成这次改动的 git commit message"
+```
+
+输出示例：
+```
+feat(auth): add email verification to registration flow
+
+- Add verification token generation in auth service
+- Send verification email via Resend API  
+- Add /verify-email route with token validation
+- Update registration flow to require verification
+```
+
+比你自己写更系统、更全面。而且格式统一，符合 Conventional Commits 规范。
+
+## 技巧 10：保持更新 + 关注 Release Notes
+
+Claude Code 更新非常频繁：
+
+```bash
+claude --version    # 检查当前版本
+npm update -g @anthropic-ai/claude-code  # 更新
+```
+
+新版本往往带来：
+- 更好的模型（代码理解更准）
+- 新功能（新的 slash command）
+- Bug 修复
+
+建议每月至少更新一次。
 
 ## 总结
 
-这 10 个技巧的核心思路是：**把 Claude 当成一个聪明的同事，而不是一个代码生成器**。给它上下文、明确目标、小步迭代，效果最好。
+| 阶段 | 核心技巧 |
+|------|---------|
+| 入门 | `/init` 理解项目 → `@` 精确引用 → 描述目标 |
+| 进阶 | 让 Claude 自测 → `/compact` 管理上下文 → 分任务 |
+| 高效 | `CLAUDE.md` 规范化 → `/plan` 先规划 → 自动提交 |
+
+核心思路始终是：**把 Claude 当成一个聪明的同事，而不是一个代码生成器。** 给它上下文、明确目标、小步迭代，效果最好。
 
 ## FAQ
 
 ### Claude Code 需要编程基础吗？
-需要基本的命令行操作能力（cd、ls、git 等）。如果完全没接触过命令行，建议先从 Cursor 这类 IDE 工具上手。
+
+需要基本的命令行操作能力（`cd`、`ls`、`git`、`npm`）。如果完全没接触过命令行，建议先从 Cursor 这类图形化 IDE 工具上手。一旦熟悉了终端，再切到 Claude Code。
 
 ### 这些技巧也适用于 Codex 吗？
-大部分通用的 AI 协作技巧（描述目标、分任务、用项目文件）适用于所有 AI 编程工具。具体的命令和语法需要看各自文档。
+
+大部分通用的 AI 协作技巧（描述目标、分任务、用项目文件、CLAUDE.md 等效物）适用于所有 AI 编程工具。但 `/init`、`/compact`、`/plan` 是 Claude Code 特有的 slash command，Codex 和 Cursor 有不同的等价方式。
+
+### Claude Code 免费额度够用吗？
+
+轻度使用（每天几轮对话）免费额度基本够用。如果你每天长时间用、处理大项目，Pro（$20/月）性价比很高。建议先用免费版一周，看使用频率再决定。
+
+### 和 Cursor 比，哪个适合我？
+
+| 你的情况 | 推荐 |
+|----------|------|
+| 习惯命令行 | Claude Code |
+| 习惯 VS Code 图形界面 | Cursor |
+| 大型项目 | Claude Code（代码库理解更深） |
+| 刚学编程 | Cursor（学习曲线更低） |
+
+两者不冲突，很多人两个都用——Cursor 做日常编辑，Claude Code 做复杂重构。
+
+### Claude Code 写 Python / Java / Go 也能用吗？
+
+能。Claude Code 支持所有主流语言。虽然它本身是 JS 生态的工具（通过 npm 安装），但 AI 模型理解所有编程语言。Python 项目用起来体验一样好。

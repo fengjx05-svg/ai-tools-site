@@ -2,66 +2,262 @@
 title: "Codex CLI 从零到上手：AI 初学者指南"
 slug: "codex-from-zero"
 category: "codex"
-description: "从安装 OpenAI Codex CLI 到完成第一个项目，完整的 AI 编程入门教程。零基础也能跟着做。"
+description: "从安装 OpenAI Codex CLI 到完成第一个项目，完整的 AI 编程入门教程。每一步都有命令示例和预期输出，零基础也能跟着做。"
 difficulty: "beginner"
-tags: ["Codex", "OpenAI", "入门"]
-updated: "2026-05-11"
+tags: ["Codex", "OpenAI", "入门", "命令行"]
+updated: "2026-05-12"
 related_tools: ["codex"]
+related_tutorials: ["claude-code-tips", "agent-intro-guide"]
 ---
 
-## 这篇文章适合谁？
+## 阅读前
 
-- 听说过 AI 编程但不知道从哪开始
-- 想用 Codex CLI 但不知道怎么装
-- 装了之后不知道怎么高效使用
+这篇文章是写给：
+- 听说过 AI 编程但不知道从哪开始的人
+- 想用 OpenAI Codex CLI 但不知道怎么装的人
+- 装了之后卡在某一步不知道怎么继续的人
+
+读完你会在 30 分钟内完成安装、配置、并让 AI 帮你写出第一个可运行的程序。
 
 ## 第一步：安装 Codex CLI
+
+打开终端，运行：
 
 ```bash
 npm install -g @openai/codex
 ```
 
-安装完成后验证：
+安装成功后验证：
 
 ```bash
 codex --version
 ```
 
-## 第二步：配置 API Key
+预期看到类似输出：
 
-你需要一个 OpenAI API Key：
+```
+Codex CLI version 0.x.x
+```
 
-1. 打开 platform.openai.com
-2. 登录后点右上角头像 → API Keys
-3. 创建一个新的 API Key
-4. 在终端配置：`export OPENAI_API_KEY="sk-你的key"`
+**如果报错 `command not found`：** 检查 Node.js 是否安装（`node --version` 应显示 v18+）。如果 Node.js 版本太低，先升级。
 
-## 第三步：第一个 AI 编程任务
+**Windows 用户注意：** 如果 PowerShell 报脚本执行策略错误，先运行：
 
-进入你的项目目录，让 Codex 帮你写代码。Codex 会分析你的项目，然后写出代码。
+```powershell
+Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
+```
 
-## 第四步：让 Codex 调试
+## 第二步：获取和配置 API Key
 
-如果你的代码有 bug，直接告诉 Codex 错误信息，它会读取相关代码给出修复方案。
+### 2.1 获取 Key
 
-## 第五步：完成一个小项目
+1. 打开 [platform.openai.com](https://platform.openai.com)
+2. 登录（没有账号的话先注册，需要验证手机号）
+3. 右上角头像 → **API keys**
+4. 点击 **Create new secret key**
+5. 复制 Key（只显示一次，马上保存！）
 
-让 Codex 帮你完成一个完整任务，比如创建一个 Flask API 端点。
+### 2.2 配置 Key
 
-## 常见错误
+**macOS / Linux：**
 
-1. **API Key 没配置好** — 检查环境变量是否设置
-2. **权限不足** — 确保 API Key 有使用权限
-3. **任务描述太模糊** — 说得越具体，效果越好
+```bash
+export OPENAI_API_KEY="sk-你的key"
+```
+
+为了每次打开终端不用重新设置，写入 shell 配置文件：
+
+```bash
+echo 'export OPENAI_API_KEY="sk-你的key"' >> ~/.zshrc
+source ~/.zshrc
+```
+
+**Windows (PowerShell)：**
+
+```powershell
+$env:OPENAI_API_KEY="sk-你的key"
+```
+
+永久设置：把上面这行加到 PowerShell Profile（`$PROFILE` 文件）里。
+
+### 2.3 验证配置
+
+```bash
+codex "echo hello world"
+```
+
+如果 Codex 正常回复，说明配置成功。
+
+## 第三步：第一个任务——生成脚本来读取 CSV
+
+### 3.1 准备测试数据
+
+创建一个 CSV 文件：
+
+```bash
+mkdir ~/codex-demo && cd ~/codex-demo
+```
+
+新建 `data.csv`：
+
+```csv
+name,age,city
+张三,28,北京
+李四,32,上海
+王五,25,广州
+赵六,30,深圳
+```
+
+### 3.2 让 Codex 写代码
+
+```bash
+codex "写一个 Python 脚本 read_csv.py，读取 data.csv 并打印前 10 行，包含行号"
+```
+
+Codex 会分析你的目录，发现 `data.csv`，然后生成代码。
+
+它可能生成类似这样的代码：
+
+```python
+import csv
+
+def read_csv(filename, max_rows=10):
+    with open(filename, 'r', encoding='utf-8') as f:
+        reader = csv.DictReader(f)
+        for i, row in enumerate(reader, 1):
+            if i > max_rows:
+                break
+            print(f"{i}. {row}")
+
+if __name__ == "__main__":
+    read_csv("data.csv")
+```
+
+### 3.3 运行验证
+
+```bash
+python read_csv.py
+```
+
+预期输出：
+
+```
+1. {'name': '张三', 'age': '28', 'city': '北京'}
+2. {'name': '李四', 'age': '32', 'city': '上海'}
+3. {'name': '王五', 'age': '25', 'city': '广州'}
+4. {'name': '赵六', 'age': '30', 'city': '深圳'}
+```
+
+## 第四步：让 Codex 调试和优化
+
+### 4.1 发现和改进问题
+
+```bash
+codex "read_csv.py 输出不太好看，帮我格式化成表格形式显示"
+```
+
+Codex 会读取当前代码，然后修改它以输出格式化的表格：
+
+```
+姓名    年龄    城市
+------  ------  ------
+张三    28      北京
+李四    32      上海
+王五    25      广州
+赵六    30      深圳
+```
+
+### 4.2 处理真正的错误
+
+如果你的代码有 bug，把错误信息直接贴给 Codex：
+
+```bash
+codex "read_csv.py 报错了：UnicodeDecodeError: 'utf-8' codec can't decode byte 0xba in position 3。帮我看一下什么问题，怎么修"
+```
+
+Codex 会识别出是编码问题，建议用 `encoding='gbk'` 或者 `chardet` 自动检测编码。
+
+## 第五步：完成一个完整的 Web API 项目
+
+这是实战环节——让 Codex 帮你从零搭建一个 API。
+
+```bash
+codex "帮我用 Python Flask 创建一个简单的 REST API：
+1. 有一个 /api/hello 端点，返回 JSON: {'message': 'Hello, Codex!'}
+2. 有一个 /api/users 端点，从上面 data.csv 读取数据，返回 JSON 数组
+3. 包含错误处理（文件不存在时返回 404）
+4. 包含启动说明
+
+请把所有文件创建好"
+```
+
+Codex 会创建：
+- `app.py` — Flask 应用
+- `requirements.txt` — 依赖列表
+- 可能需要你手动 `pip install flask`
+
+然后运行：
+
+```bash
+python app.py
+```
+
+打开浏览器访问 `http://localhost:5000/api/hello`，看到 JSON 返回就成功了。
+
+## 常见错误及解决
+
+| 错误 | 原因 | 解决 |
+|------|------|------|
+| `command not found: codex` | 没装或 PATH 没配好 | 重新 `npm install -g`，检查 PATH |
+| `Authentication error` | API Key 没设或过期 | 检查 `echo $OPENAI_API_KEY`，重新去 OpenAI 生成 |
+| `Rate limit exceeded` | 免费额度用完了 | 等一段时间或用付费 Key |
+| 生成的代码跑不通 | Codex 可能没理解完整需求 | 描述更具体些，或者分步让它生成 |
+| 输出太长被截断 | 回复有长度限制 | 分步提问，"先做 A，再做 B" |
+| `ModuleNotFoundError` | 缺少 Python 包 | 用 `pip install` 安装 Codex 建议的包 |
 
 ## 下一步
 
-完成这个入门后，推荐看看 Claude Code 教程，对比一下两个工具，选一个最适合你的。
+- 试试用 Codex 处理你自己的真实项目
+- 对比一下 [Claude Code 教程](/tutorials/claude-code-tips)，选最适合你的工具
+- 了解 [AI Agent 的核心概念](/tutorials/agent-intro-guide)，理解这些工具背后的原理
 
 ## FAQ
 
 ### Codex 和 ChatGPT 有什么区别？
-Codex 是专门为编程设计的终端工具，可以直接操作文件。ChatGPT 是通用的网页对话工具，不能直接操作你的项目代码。
 
-### 我需要会 Python 才能用 Codex 吗？
-不需要。Codex 支持多种语言，你也可以用中文描述需求。但基础编程知识能帮你更好地判断 AI 生成的代码质量。
+Codex CLI 是专门为编程设计的**终端工具**，可以直接读写项目文件、执行命令。ChatGPT 是通用的**网页对话工具**，能帮你分析和建议，但不能直接操作你的代码文件。
+
+具体来说：
+- Codex 知道你的项目结构，ChatGPT 不知道
+- Codex 可以直接创建/修改文件，ChatGPT 只能给你代码让你复制
+- Codex 可以运行命令看输出，ChatGPT 不行
+
+### 我需要会编程才能用 Codex 吗？
+
+需要基础编程知识。你不需要是高手，但至少要知道：
+- 命令行基本操作（`cd`、`ls`、`mkdir`）
+- 会用文本编辑器
+- 理解基础的编程概念（变量、函数、文件）
+
+如果完全零基础，建议先花一两周学 Python 基础，再来用 AI 编程工具——这样你能判断 AI 写的代码好不好。
+
+### Codex 免费额度是多少？够用吗？
+
+OpenAI 会给新账号一定免费额度（通常 $5-$20）。轻度使用（每天几个小任务）能用几周。重度使用（整天用）需要绑定信用卡付费。按量付费的好处是用多少付多少，不像月费制有浪费。
+
+### Codex 支持哪些编程语言？
+
+支持所有主流语言：Python、JavaScript、TypeScript、Go、Rust、Java、C/C++、Ruby、PHP 等。Python 和 JavaScript 的体验最好（因为训练数据最多）。
+
+### 和 Claude Code 比，Codex 的优势是什么？
+
+| 维度 | Codex | Claude Code |
+|------|-------|-------------|
+| 模型选择 | 可以选 GPT-5/o4 等不同模型 | 固定用 Claude 系列 |
+| 付费方式 | 按量付费 | 免费额度 + 月费 |
+| 中文对话 | 好 | 更好 |
+| 代码库理解 | 好 | 更好 |
+| 上手难度 | 稍容易 | 稍难 |
+| 适合人群 | 已用 OpenAI 生态的人 | 追求代码理解深度的人 |
+
+建议两个都试试，各用一周，自然知道哪个更顺手。
