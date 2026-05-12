@@ -1,32 +1,49 @@
+"use client";
+
+import { useEffect, useRef } from "react";
+
+const AD_CLIENT = "ca-pub-4888393944328810";
+
+const formatMap = {
+  auto: "auto",
+  rectangle: "rectangle",
+  horizontal: "horizontal",
+  vertical: "vertical",
+} as const;
+
+type AdFormat = keyof typeof formatMap;
+
 export default function AdSlot({
   slot,
   format = "auto",
   className = "",
 }: {
   slot: string;
-  format?: "auto" | "rectangle" | "horizontal" | "vertical";
+  format?: AdFormat;
   className?: string;
 }) {
+  const pushedRef = useRef(false);
+
+  useEffect(() => {
+    if (pushedRef.current) return;
+    pushedRef.current = true;
+    try {
+      (window.adsbygoogle = window.adsbygoogle || []).push({});
+    } catch {
+      // adblock or network issue — silently ignore
+    }
+  }, []);
+
   return (
     <div className={`my-8 flex justify-center ${className}`}>
-      <div
-        className="bg-slate-50/80 border border-dashed border-slate-200 rounded-xl flex items-center justify-center text-slate-400 text-sm"
-        style={{
-          minHeight:
-            format === "horizontal"
-              ? 90
-              : format === "vertical"
-                ? 600
-                : 250,
-          width: "100%",
-          maxWidth: 728,
-        }}
-      >
-        <div className="text-center">
-          <p className="font-medium text-slate-400">AdSense 广告位</p>
-          <p className="text-xs mt-1 text-slate-300">{slot}</p>
-        </div>
-      </div>
+      <ins
+        className="adsbygoogle"
+        style={{ display: "block", width: "100%", maxWidth: 728 }}
+        data-ad-client={AD_CLIENT}
+        data-ad-slot={slot}
+        data-ad-format={formatMap[format]}
+        data-full-width-responsive="true"
+      />
     </div>
   );
 }
