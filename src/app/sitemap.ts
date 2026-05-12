@@ -1,7 +1,7 @@
 import { MetadataRoute } from "next";
 import { getAllTools, getAllTutorials, getAllCompares } from "@/lib/content";
 
-const BASE_URL = "https://aitools.site";
+const BASE_URL = "https://ai-tools-site-fznaqbe4q-feng20911-s-projects.vercel.app";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const staticPages = [
