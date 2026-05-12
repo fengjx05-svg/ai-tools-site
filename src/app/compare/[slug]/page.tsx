@@ -80,7 +80,7 @@ export default async function ComparePage({ params }: Props) {
       <Container>
         <article className="py-8 max-w-3xl mx-auto">
           <h1 className="text-3xl font-bold mb-2">{compare.frontmatter.title}</h1>
-          <p className="text-gray-500 mb-6">{compare.frontmatter.description}</p>
+          <p className="text-slate-600 mb-6">{compare.frontmatter.description}</p>
 
           <AdSlot slot="content-top" />
 

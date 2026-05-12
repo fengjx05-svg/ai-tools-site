@@ -76,17 +76,17 @@ export default async function TutorialPage({ params }: Props) {
       />
       <Container>
         <article className="py-8 max-w-3xl mx-auto">
-          <div className="mb-2 text-sm text-gray-400">
+          <div className="mb-2 text-sm text-slate-500">
             <span className="bg-blue-100 text-blue-700 px-2 py-0.5 rounded text-xs font-medium">
               {difficultyLabel[tutorial.frontmatter.difficulty]}
             </span>
             <span className="ml-2">{tutorial.frontmatter.updated}</span>
           </div>
           <h1 className="text-3xl font-bold mb-2">{tutorial.frontmatter.title}</h1>
-          <p className="text-gray-500 mb-4">{tutorial.frontmatter.description}</p>
+          <p className="text-slate-600 mb-4">{tutorial.frontmatter.description}</p>
           <div className="flex gap-2 mb-6">
             {tutorial.frontmatter.tags.map((tag) => (
-              <span key={tag} className="text-xs bg-gray-100 text-gray-600 px-2 py-0.5 rounded">
+              <span key={tag} className="text-xs bg-slate-100 text-slate-600 px-2 py-0.5 rounded">
                 {tag}
               </span>
             ))}

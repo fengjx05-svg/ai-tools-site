@@ -70,7 +70,7 @@ export default async function ToolPage({ params }: Props) {
       />
       <Container>
         <article className="py-8 max-w-3xl mx-auto">
-          <div className="mb-2 text-sm text-gray-400">
+          <div className="mb-2 text-sm text-slate-500">
             <span className="bg-blue-100 text-blue-700 px-2 py-0.5 rounded text-xs font-medium">
               {tool.frontmatter.category}
             </span>
@@ -80,7 +80,7 @@ export default async function ToolPage({ params }: Props) {
             </span>
           </div>
           <h1 className="text-3xl font-bold mb-2">{tool.frontmatter.title} 评测</h1>
-          <p className="text-gray-500 mb-4">{tool.frontmatter.description}</p>
+          <p className="text-slate-600 mb-4">{tool.frontmatter.description}</p>
           <div className="flex gap-4 mb-6 text-sm">
             <span>💰 {tool.frontmatter.pricing}</span>
             <a

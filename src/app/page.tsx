@@ -15,7 +15,7 @@ export default function HomePage() {
         <h1 className="text-4xl font-bold mb-4">
           找到最适合你的 AI 编程工具
         </h1>
-        <p className="text-lg text-gray-500 max-w-2xl mx-auto mb-6">
+        <p className="text-lg text-slate-600 max-w-2xl mx-auto mb-6">
           精选 2026 年最值得用的 AI 编程工具和实战教程。
           从 Claude Code 到 Codex，从零基础到高效使用，帮你快速上手 AI 编程。
         </p>
@@ -28,7 +28,7 @@ export default function HomePage() {
           </Link>
           <Link
             href="/tutorials"
-            className="border border-gray-300 px-6 py-3 rounded-lg font-medium hover:bg-gray-50 transition-colors"
+            className="border border-slate-300 px-6 py-3 rounded-lg font-medium hover:bg-slate-50 transition-colors"
           >
             查看教程
           </Link>
@@ -65,9 +65,9 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="py-12 text-center bg-blue-50 rounded-2xl my-8">
-        <h2 className="text-2xl font-bold mb-3">不知道选哪个？</h2>
-        <p className="text-gray-500 mb-6">
+      <section className="py-12 text-center bg-slate-800 rounded-2xl my-8">
+        <h2 className="text-2xl font-bold mb-3 text-white">不知道选哪个？</h2>
+        <p className="text-slate-300 mb-6">
           看看 Claude Code vs Codex 的详细对比，帮你做出最适合的选择。
         </p>
         <Link

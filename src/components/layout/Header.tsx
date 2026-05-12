@@ -9,7 +9,7 @@ const navLinks = [
 
 export default function Header() {
   return (
-    <header className="border-b border-gray-200">
+    <header className="border-b border-slate-200 bg-white">
       <div className="mx-auto max-w-6xl px-4 py-4 flex items-center justify-between">
         <Link href="/" className="text-xl font-bold text-blue-600">
           AI 工具导航
@@ -20,7 +20,7 @@ export default function Header() {
               <li key={link.href}>
                 <Link
                   href={link.href}
-                  className="text-gray-600 hover:text-blue-600 transition-colors"
+                  className="text-slate-600 hover:text-blue-600 transition-colors"
                 >
                   {link.label}
                 </Link>

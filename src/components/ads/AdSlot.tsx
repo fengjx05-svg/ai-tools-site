@@ -10,7 +10,7 @@ export default function AdSlot({
   return (
     <div className={`my-8 flex justify-center ${className}`}>
       <div
-        className="bg-gray-50 border-2 border-dashed border-gray-300 rounded-lg flex items-center justify-center text-gray-400 text-sm"
+        className="bg-slate-50 border-2 border-dashed border-slate-200 rounded-lg flex items-center justify-center text-slate-400 text-sm"
         style={{
           minHeight:
             format === "horizontal"
