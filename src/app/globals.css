@@ -134,3 +134,21 @@
   color: var(--color-blue-700);
   text-decoration: underline;
 }
+
+/* ── AdSense unfilled fallback ── */
+ins.adsbygoogle[data-ad-status="unfilled"] {
+  height: 0 !important;
+  min-height: 0 !important;
+  overflow: hidden !important;
+}
+
+/* Prevent ad container from creating massive whitespace */
+.ad-container {
+  container-type: inline-size;
+}
+
+@container (max-width: 400px) {
+  .ad-container ins.adsbygoogle {
+    max-height: 100px;
+  }
+}
