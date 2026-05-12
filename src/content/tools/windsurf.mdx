@@ -1,0 +1,130 @@
+---
+title: "Windsurf"
+slug: "windsurf"
+category: "ai-coding-tools"
+description: "Windsurf 是由 Cognition AI 推出的 AI 原生 IDE，以 Cascade Agent 和独特的 Memories 记忆系统著称。本文深度评测其功能、价格、适用人群和与 Cursor 的真实对比。"
+rating: 4.0
+pricing: "Free / Pro $15/月起"
+url: "https://windsurf.com"
+tags: ["AI编程", "Windsurf", "IDE", "Cascade"]
+updated: "2026-05-12"
+---
+
+## 简介
+
+Windsurf 是一款 AI 原生代码编辑器，最初由 Codeium 团队打造，2025 年底被 Cognition AI（Devin 的母公司）收购。它在 VS Code 基础上重建，把 AI 作为核心架构而非外挂插件。
+
+和 Cursor 最大的不同：Windsurf 更强调 Agent 的**记忆能力**和**大型代码库**的深度理解。
+
+## 核心功能
+
+### Cascade Agent — 多文件自主编程
+
+Cascade 是 Windsurf 的旗舰 AI Agent，它不是简单的聊天机器人，而是一个能理解整个项目结构的半自主编程系统：
+
+- **多步任务规划**：自动将复杂需求拆解成 Todo 列表
+- **跨文件编辑**：理解文件之间的依赖关系，改 A 时自动更新引用了 A 的 B
+- **执行终端命令**：自主安装依赖、运行测试、修复 lint 错误
+- **每次提示最多 20 次工具调用**：比其他 IDE Agent 的动作能力更强
+
+### Memories 记忆系统 — 独有功能
+
+这是 Windsurf 最独特的能力，其他 AI IDE 都没有：
+
+- **自动学习**：使用约 48 小时后，自动习得你的项目架构、命名规范、常用库和编码风格
+- **跨会话持久化**：一周前的设计决策，Cascade 今天还记得，不需重新解释
+- **实测数据**：在 5 万行 React/Node.js 项目上，匹配已有代码模式的准确率达 **78%**
+
+简单说：Cursor 每次新会话都要从头理解你的项目；Windsurf 会"记住"你的项目。
+
+### Supercomplete — 预测你的下一步编辑
+
+不只是补全下一行代码，而是预测你的**下一个编辑动作**。它读取你最近 30-90 秒的编辑历史和光标移动，结合轻量级 AST 分析，提前知道你要干什么。
+
+### 内置浏览器和 MCP 生态
+
+- 内置浏览器：Cascade 可以直接打开网页检查元素、截图、将截图发给 AI 分析
+- 21+ MCP 集成：Figma、Slack、Stripe、PostgreSQL 等原生支持
+- 拖拽图片：把 Figma 设计稿拖进编辑器 → Cascade 自动生成 React 组件和 Tailwind 样式
+- 一键部署 Netlify
+
+### 自有模型 SWE-1.5
+
+- 性能接近 Claude 4.5，但速度快 **13 倍**
+- 使用 SWE 模型**不消耗 credits**——这是很大的成本优势
+- 也支持 Claude、GPT-5、Gemini 等第三方模型
+
+## 适合谁用？
+
+| 人群 | 适合度 | 原因 |
+|------|--------|------|
+| 大型项目开发者 | ⭐⭐⭐⭐⭐ | Memories 记住项目架构，跨文件重构能力强 |
+| 预算敏感的个人开发者 | ⭐⭐⭐⭐⭐ | Pro $15/月，SWE 模型零 credits 消耗 |
+| JetBrains/Vim 用户 | ⭐⭐⭐⭐ | 支持 40+ 编辑器，不仅是 VS Code |
+| AI 编程初学者 | ⭐⭐⭐ | 功能强大但界面不如 Cursor 直观 |
+| 合规要求高的企业 | ⭐⭐⭐⭐⭐ | HIPAA、FedRAMP、ITAR 全通过 |
+
+## 价格
+
+| 套餐 | 价格 | 说明 |
+|------|------|------|
+| Free | $0 | 25 credits/月 + 无限自动补全，适合体验 |
+| Pro | $15/月 | 500 credits/月，全部模型，完整 Cascade |
+| Teams | $30/人/月 | 管理员面板、RBAC、分析 |
+| Enterprise | $60+/人/月 | ZDR、FedRAMP、SSO、混合部署 |
+
+**注意**：免费版 25 credits 大约 3 天用完。Pro 的 SWE 自有模型不消耗 credits，实际花费远低于 $15。
+
+## Windsurf vs Cursor vs Claude Code
+
+| 维度 | Windsurf | Cursor | Claude Code |
+|------|----------|--------|-------------|
+| Pro 价格 | $15/月 | $20/月 | $20/月 |
+| Agent 能力 | Cascade（跨会话记忆） | Composer（8 个并行 Agent） | 终端自主执行 |
+| 持久记忆 | ✅ Memories | ❌ | CLAUDE.md |
+| 代码补全速度 | 快 | 最快（&lt;200ms） | 无实时补全 |
+| 自有模型 | SWE-1.5（免费、极快） | 无 | 无 |
+| 大型代码库 | 优秀（1 亿+ 行） | 一般 | 优秀 |
+| 合规认证 | HIPAA、FedRAMP、ITAR | SOC 2 | 基础 |
+| 编辑器支持 | 40+ IDE | VS Code only | 终端 + IDE 插件 |
+
+## 总结
+
+Windsurf 不是最漂亮的 AI IDE（那是 Cursor），但它是**性价比最高**的选择，且 Memories 记忆系统和大代码库能力独一无二。
+
+**推荐场景**：
+- 长期维护的大项目 → Windsurf 的记忆系统优势巨大
+- 预算紧张的个人开发者 → $15/月的 Pro 足够日常使用
+- 企业/合规场景 → Windsurf 是目前唯一通过 HIPAA/FedRAMP 的 AI IDE
+- 需要 JetBrains/Vim 集成 → Windsurf 是唯一选择
+
+**不推荐场景**：
+- 追求最快的 Tab 补全速度 → Cursor
+- 追求并行 Agent 大批量处理 → Cursor 的 8 Agent 模式
+- 喜欢终端工作流 → Claude Code
+
+## FAQ
+
+### Windsurf 免费版够用吗？
+
+不够。25 credits 大约 3 天就会用完。免费版只能用来体验界面和基础功能。日常使用至少需要 Pro（$15/月）。
+
+### Windsurf 的 Memories 真的有用吗？
+
+有用。在 5 万行代码项目上的实测显示，它匹配已有代码模式的准确率达到 78%。对于长期维护的项目，你不必每次对话都重复解释项目规范——Cascade 会自动回忆之前的决策和约定。
+
+### Windsurf 和 Cursor 选哪个？
+
+如果你是个人开发者、追求速度和界面流畅度，选 Cursor。如果你在大型项目上工作、需要跨会话的记忆、或者预算敏感，选 Windsurf。两者不是互斥的——很多开发者两个都用。
+
+### Windsurf 支持中文吗？
+
+支持。你可以用中文和 Cascade 对话，AI 理解中文没问题。
+
+### Windsurf 会取代 VS Code 吗？
+
+Windsurf 本身就是 VS Code 的分支，界面几乎一样，导入设置只需 10 分钟。如果你习惯 VS Code，迁移成本几乎为零。
+
+### Cognition AI 收购后 Windsurf 会变成 Devin 吗？
+
+目前官方路线图中 Windsurf 和 Devin 是分开的产品。但长期来看，Windsurf 的 Cascade 和 Devin 的自主编程能力可能有整合空间。短期内 Windsurf 独立运营，持续更新。

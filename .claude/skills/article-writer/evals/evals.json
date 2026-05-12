@@ -1,0 +1,23 @@
+{
+  "skill_name": "article-writer",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "写一篇关于 Cursor 0.48 版本新功能的教程，面向刚入门 AI 编程的新手，要求包含具体的使用步骤和代码示例",
+      "expected_output": "在 src/content/tutorials/ 下生成一个教程 MDX 文件，包含正确的 frontmatter（title, slug, category, description, difficulty, tags, updated），正文含 H2 章节、代码块、至少一个表格、FAQ 区，内容针对 AI 初学者",
+      "files": []
+    },
+    {
+      "id": 2,
+      "prompt": "帮我翻译这篇文章并改写成适合我网站的教程 https://www.builder.io/blog/prompt-engineering-tips ，标注转载来源",
+      "expected_output": "深度改写为中文教程，适应 AI 初学者，包含正确的 frontmatter，文末有参考来源标注，保存到 src/content/tutorials/",
+      "files": []
+    },
+    {
+      "id": 3,
+      "prompt": "给我规划 5 篇 AI 编程工具相关的文章，我想先看看主题再决定写哪些",
+      "expected_output": "生成 5 篇文章的主题清单，每篇含标题、文章类型（tutorial/tool/compare）、一句话描述，等待用户确认，不开始撰写",
+      "files": []
+    }
+  ]
+}
