@@ -23,9 +23,9 @@ export default function TutorialsPage() {
         ]}
       />
       <Container>
-        <div className="py-8">
-          <h1 className="text-3xl font-bold mb-2">AI 编程教程</h1>
-          <p className="text-slate-600 mb-8">
+        <div className="py-10">
+          <h1 className="text-3xl font-bold text-slate-900 tracking-tight mb-2">AI 编程教程</h1>
+          <p className="text-slate-500 mb-10">
             从零开始的 AI 编程实战教程，持续更新。
           </p>
           <AdSlot slot="tutorials-top" format="horizontal" />

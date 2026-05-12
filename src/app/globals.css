@@ -1,74 +1,136 @@
 @import "tailwindcss";
 @plugin "@tailwindcss/typography";
 
-/* ── Prose overrides for reliable content styling ── */
-/* These fix conflicts between Tailwind utility classes and the typography plugin's CSS cascade */
-
-.prose {
-  --tw-prose-body: oklch(0.208 0.042 265.755);        /* slate-700 */
-  --tw-prose-headings: oklch(0.129 0.042 264.695);    /* slate-900 */
-  --tw-prose-lead: oklch(0.446 0.043 257.281);        /* slate-600 */
-  --tw-prose-links: oklch(0.546 0.245 262.881);       /* blue-600 */
-  --tw-prose-bold: oklch(0.129 0.042 264.695);        /* slate-900 */
-  --tw-prose-counters: oklch(0.446 0.043 257.281);
-  --tw-prose-bullets: oklch(0.704 0.04 256.788);      /* slate-400 */
-  --tw-prose-hr: oklch(0.869 0.022 252.894);          /* slate-200 */
-  --tw-prose-quotes: oklch(0.446 0.043 257.281);
-  --tw-prose-quote-borders: oklch(0.704 0.04 256.788);
-  --tw-prose-captions: oklch(0.554 0.046 257.417);
-  --tw-prose-code: oklch(0.208 0.042 265.755);        /* slate-700 */
-  --tw-prose-pre-code: oklch(0.968 0.007 247.896);    /* slate-100 */
-  --tw-prose-pre-bg: oklch(0.208 0.042 265.755);      /* slate-700 */
-  --tw-prose-th-borders: oklch(0.704 0.04 256.788);
-  --tw-prose-td-borders: oklch(0.929 0.013 255.508);  /* slate-100 */
+/* ── Design tokens ── */
+@theme {
+  --font-sans: "Outfit", "PingFang SC", "Microsoft YaHei", "Hiragino Sans GB", "Noto Sans SC", ui-sans-serif, sans-serif;
+  --font-mono: "JetBrains Mono", "Fira Code", "Cascadia Code", ui-monospace, monospace;
+  --color-accent: var(--color-blue-600);
+  --color-accent-hover: var(--color-blue-700);
+  --color-surface: var(--color-white);
+  --color-border: var(--color-slate-200);
 }
 
-/* ── Table defaults ── */
+/* ── Prose: editorial typography ── */
+.prose {
+  --tw-prose-body: var(--color-slate-700);
+  --tw-prose-headings: var(--color-slate-900);
+  --tw-prose-lead: var(--color-slate-600);
+  --tw-prose-links: var(--color-blue-600);
+  --tw-prose-bold: var(--color-slate-900);
+  --tw-prose-counters: var(--color-slate-500);
+  --tw-prose-bullets: var(--color-slate-400);
+  --tw-prose-hr: var(--color-slate-200);
+  --tw-prose-quotes: var(--color-slate-600);
+  --tw-prose-quote-borders: var(--color-slate-300);
+  --tw-prose-captions: var(--color-slate-500);
+  --tw-prose-code: var(--color-slate-700);
+  --tw-prose-pre-code: var(--color-slate-100);
+  --tw-prose-pre-bg: var(--color-slate-800);
+  --tw-prose-th-borders: var(--color-slate-300);
+  --tw-prose-td-borders: var(--color-slate-100);
+  max-width: none;
+}
+
+/* ── Headings ── */
+.prose h2 {
+  font-family: var(--font-sans);
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  margin-top: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+.prose h3 {
+  font-family: var(--font-sans);
+  font-weight: 600;
+  margin-top: 2rem;
+  margin-bottom: 0.75rem;
+}
+
+/* ── Tables ── */
 .prose table {
-  border-collapse: collapse;
+  border-collapse: separate;
+  border-spacing: 0;
   width: 100%;
+  font-size: 0.875rem;
 }
 
 .prose thead th {
-  background-color: oklch(0.984 0.003 247.858);        /* slate-50 */
-  color: oklch(0.129 0.042 264.695);                   /* slate-900 */
+  background-color: var(--color-slate-50);
+  color: var(--color-slate-700);
   font-weight: 600;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
   text-align: left;
   padding: 0.75rem 1rem;
-  border-bottom: 2px solid oklch(0.869 0.022 252.894); /* slate-200 */
+  border-bottom: 2px solid var(--color-slate-200);
+}
+
+.prose thead th:first-child {
+  border-top-left-radius: 0.75rem;
+}
+
+.prose thead th:last-child {
+  border-top-right-radius: 0.75rem;
 }
 
 .prose tbody td {
   padding: 0.75rem 1rem;
-  border-top: 1px solid oklch(0.929 0.013 255.508);    /* slate-100 */
+  border-top: 1px solid var(--color-slate-100);
 }
 
 .prose tbody tr:nth-child(even) {
-  background-color: oklch(0.984 0.003 247.858 / 0.5);  /* slate-50/50 */
+  background-color: oklch(0.984 0.003 247.858 / 0.4);
 }
 
 /* ── Code blocks ── */
 .prose pre {
-  background-color: oklch(0.129 0.042 264.695);         /* slate-900 */
-  color: oklch(0.968 0.007 247.896);                    /* slate-100 */
+  background-color: var(--color-slate-800);
+  color: var(--color-slate-100);
+  border: 1px solid var(--color-slate-700);
   border-radius: 0.75rem;
-  padding: 1rem;
+  padding: 1rem 1.25rem;
   overflow-x: auto;
+  font-family: var(--font-mono);
+  font-size: 0.8125rem;
+  line-height: 1.7;
 }
 
 .prose :not(pre) > code {
-  background-color: oklch(0.968 0.007 247.896);         /* slate-100 */
-  color: oklch(0.208 0.042 265.755);                    /* slate-700 */
+  background-color: var(--color-slate-100);
+  color: var(--color-slate-700);
   padding: 0.125rem 0.375rem;
   border-radius: 0.25rem;
-  font-size: 0.875em;
-  font-weight: normal;
+  font-family: var(--font-mono);
+  font-size: 0.8125rem;
+  font-weight: 400;
 }
 
-/* Ensure inline code inside <pre> doesn't get the inline treatment */
 .prose pre code {
   background-color: transparent;
   color: inherit;
   padding: 0;
   border-radius: 0;
+}
+
+/* ── Blockquote ── */
+.prose blockquote {
+  border-left: 3px solid var(--color-slate-300);
+  padding-left: 1rem;
+  color: var(--color-slate-600);
+  font-style: italic;
+}
+
+/* ── Links ── */
+.prose a {
+  color: var(--color-blue-600);
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.prose a:hover {
+  color: var(--color-blue-700);
+  text-decoration: underline;
 }

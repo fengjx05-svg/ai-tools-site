@@ -27,11 +27,11 @@ export default function ToolsPage() {
         ]}
       />
       <Container>
-        <div className="py-8">
-          <h1 className="text-3xl font-bold mb-2">
+        <div className="py-10">
+          <h1 className="text-3xl font-bold text-slate-900 tracking-tight mb-2">
             2026 年最好用的 AI 编程工具
           </h1>
-          <p className="text-slate-600 mb-8">
+          <p className="text-slate-500 mb-10">
             精选推荐，持续更新。帮你找到最适合的 AI 编程助手。
           </p>
           <AdSlot slot="top-banner" format="horizontal" />

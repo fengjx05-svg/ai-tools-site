@@ -69,18 +69,20 @@ export default async function ToolPage({ params }: Props) {
         ]}
       />
       <Container>
-        <article className="py-8 max-w-3xl mx-auto">
-          <div className="mb-2 text-sm text-slate-500">
-            <span className="bg-blue-100 text-blue-700 px-2 py-0.5 rounded text-xs font-medium">
+        <article className="py-10 max-w-3xl mx-auto">
+          <div className="mb-3 text-sm text-slate-500">
+            <span className="bg-blue-100 text-blue-700 px-2.5 py-0.5 rounded-full text-xs font-semibold">
               {tool.frontmatter.category}
             </span>
-            <span className="ml-2">
-              评分：{"★".repeat(Math.floor(tool.frontmatter.rating))}
+            <span className="ml-3 text-amber-500">
+              {"★".repeat(Math.floor(tool.frontmatter.rating))}
               {"☆".repeat(5 - Math.floor(tool.frontmatter.rating))}
             </span>
           </div>
-          <h1 className="text-3xl font-bold mb-2">{tool.frontmatter.title} 评测</h1>
-          <p className="text-slate-600 mb-4">{tool.frontmatter.description}</p>
+          <h1 className="text-3xl font-bold text-slate-900 tracking-tight mb-3">
+            {tool.frontmatter.title} 评测
+          </h1>
+          <p className="text-slate-500 mb-5 leading-relaxed">{tool.frontmatter.description}</p>
           <div className="flex gap-4 mb-6 text-sm">
             <span>💰 {tool.frontmatter.pricing}</span>
             <a

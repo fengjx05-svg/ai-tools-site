@@ -31,10 +31,10 @@ export async function generateStaticParams() {
   }));
 }
 
-const difficultyLabel: Record<string, string> = {
-  beginner: "入门",
-  intermediate: "进阶",
-  advanced: "高级",
+const difficultyColor: Record<string, string> = {
+  beginner: "bg-emerald-100 text-emerald-700",
+  intermediate: "bg-amber-100 text-amber-700",
+  advanced: "bg-rose-100 text-rose-700",
 };
 
 export default async function TutorialPage({ params }: Props) {
@@ -75,18 +75,24 @@ export default async function TutorialPage({ params }: Props) {
         ]}
       />
       <Container>
-        <article className="py-8 max-w-3xl mx-auto">
-          <div className="mb-2 text-sm text-slate-500">
-            <span className="bg-blue-100 text-blue-700 px-2 py-0.5 rounded text-xs font-medium">
-              {difficultyLabel[tutorial.frontmatter.difficulty]}
+        <article className="py-10 max-w-3xl mx-auto">
+          <div className="mb-3 text-sm text-slate-500 flex items-center gap-3">
+            <span
+              className={`text-xs font-semibold px-2.5 py-0.5 rounded-full ${
+                difficultyColor[tutorial.frontmatter.difficulty] ?? "bg-slate-100 text-slate-600"
+              }`}
+            >
+              {tutorial.frontmatter.difficulty === "beginner" ? "入门" : tutorial.frontmatter.difficulty === "intermediate" ? "进阶" : "高级"}
             </span>
-            <span className="ml-2">{tutorial.frontmatter.updated}</span>
+            <span>{tutorial.frontmatter.updated}</span>
           </div>
-          <h1 className="text-3xl font-bold mb-2">{tutorial.frontmatter.title}</h1>
-          <p className="text-slate-600 mb-4">{tutorial.frontmatter.description}</p>
+          <h1 className="text-3xl font-bold text-slate-900 tracking-tight mb-3">
+            {tutorial.frontmatter.title}
+          </h1>
+          <p className="text-slate-500 mb-5 leading-relaxed">{tutorial.frontmatter.description}</p>
           <div className="flex gap-2 mb-6">
             {tutorial.frontmatter.tags.map((tag) => (
-              <span key={tag} className="text-xs bg-slate-100 text-slate-600 px-2 py-0.5 rounded">
+              <span key={tag} className="text-xs bg-slate-100 text-slate-600 px-2 py-0.5 rounded-md font-medium">
                 {tag}
               </span>
             ))}
