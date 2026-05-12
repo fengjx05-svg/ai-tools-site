@@ -17,6 +17,9 @@ export const metadata: Metadata = {
     index: true,
     follow: true,
   },
+  verification: {
+    google: "REPLACE_WITH_YOUR_GOOGLE_VERIFICATION_CODE",
+  },
 };
 
 export const viewport: Viewport = {
