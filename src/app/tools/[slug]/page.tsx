@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import Container from "@/components/layout/Container";
 import AdSlot from "@/components/ads/AdSlot";
 import RelatedLinks from "@/components/seo/RelatedLinks";
+import MDXContent from "@/components/content/MDXContent";
 import { ArticleJsonLd, BreadcrumbJsonLd, FaqJsonLd } from "@/components/seo/JsonLd";
 import { getTool, getAllTools } from "@/lib/content";
 
@@ -94,37 +95,7 @@ export default async function ToolPage({ params }: Props) {
 
           <AdSlot slot="content-top" />
 
-          <div className="prose prose-gray max-w-none mt-8">
-            {tool.content
-              .replace(/---[\s\S]*?---/, "")
-              .split("\n")
-              .map((line, i) => {
-                if (line.startsWith("## ")) {
-                  return (
-                    <h2 key={i} className="text-xl font-bold mt-8 mb-4">
-                      {line.replace("## ", "")}
-                    </h2>
-                  );
-                }
-                if (line.startsWith("### ")) {
-                  return (
-                    <h3 key={i} className="text-lg font-semibold mt-6 mb-3">
-                      {line.replace("### ", "")}
-                    </h3>
-                  );
-                }
-                if (line.startsWith("```")) {
-                  return null;
-                }
-                if (line.startsWith("|")) {
-                  return <p key={i} className="font-mono text-sm my-1 whitespace-pre-wrap">{line}</p>;
-                }
-                if (line.trim() === "") {
-                  return <div key={i} className="h-3" />;
-                }
-                return <p key={i} className="my-2 leading-relaxed">{line}</p>;
-              })}
-          </div>
+          <MDXContent source={tool.content} />
 
           <AdSlot slot="content-bottom" />
 
