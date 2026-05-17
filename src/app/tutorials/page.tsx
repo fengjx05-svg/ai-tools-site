@@ -28,13 +28,13 @@ export default function TutorialsPage() {
           <p className="text-slate-500 mb-10">
             从零开始的 AI 编程实战教程，持续更新。
           </p>
-          <AdSlot slot="8306337799" format="horizontal" />
+          <AdSlot slot="9176027335" format="horizontal" />
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {tutorials.map(({ frontmatter }) => (
               <ArticleCard key={frontmatter.slug} tutorial={frontmatter} />
             ))}
           </div>
-          <AdSlot slot="8306337799" format="horizontal" />
+          <AdSlot slot="9176027335" format="horizontal" />
         </div>
       </Container>
     </>

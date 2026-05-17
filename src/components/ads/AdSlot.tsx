@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 
-const AD_CLIENT = "ca-pub-4888393944328810";
+const AD_CLIENT = "ca-pub-9120376243585799";
 
 type AdFormat = "auto" | "rectangle" | "horizontal" | "vertical";
 

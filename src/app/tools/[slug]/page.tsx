@@ -95,11 +95,11 @@ export default async function ToolPage({ params }: Props) {
             </a>
           </div>
 
-          <AdSlot slot="8306337799" />
+          <AdSlot slot="9176027335" />
 
           <MDXContent source={tool.content} />
 
-          <AdSlot slot="8306337799" />
+          <AdSlot slot="9176027335" />
 
           <RelatedLinks
             title="更多 AI 工具推荐"

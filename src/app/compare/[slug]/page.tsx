@@ -84,11 +84,11 @@ export default async function ComparePage({ params }: Props) {
           </h1>
           <p className="text-slate-500 mb-6 leading-relaxed">{compare.frontmatter.description}</p>
 
-          <AdSlot slot="8306337799" />
+          <AdSlot slot="9176027335" />
 
           <MDXContent source={compare.content} />
 
-          <AdSlot slot="8306337799" />
+          <AdSlot slot="9176027335" />
 
           <RelatedLinks title="对比中的工具" links={relatedLinks} />
         </article>
